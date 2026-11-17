@@ -1,6 +1,7 @@
 {% set name = "menpo" %}
 {% set version = "0.12.0" %}
-{% set python_min = "3.10" %}
+# upstream supports 3.10, but conda-forge has no 3.10 builds of cyvlfeat/opencv any more (python_min is 3.11)
+{% set python_min = "3.11" %}
 
 package:
   name: {{ name|lower }}
