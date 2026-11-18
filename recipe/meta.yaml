@@ -1,32 +1,36 @@
 {% set name = "menpo" %}
-{% set version = "0.11.1" %}
+{% set version = "0.12.0" %}
+# upstream supports 3.10, but conda-forge has no 3.10 build of cyvlfeat >=0.8.1 (python_min is 3.11), and
+# the noarch test environment is solved at python_min
+{% set python_min = "3.11" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 6078270962d7c036872d61a470b0b539e972990748a33a2a31940a06386abefb
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: 82893c5f5ddcadc1f528f629672e1dbff8411635661c5e5400f05ca20c0f7a90
 
 build:
   number: 0
   noarch: python
-  script: "{{ PYTHON }} -m pip install . -vv"
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
 
 requirements:
   host:
-    - python >=3.7
+    - python {{ python_min }}.*
     - pip
-
+    - setuptools >=77
+    - setuptools-scm >=8
   run:
-    - python >=3.7
-    - {{ pin_compatible('numpy') }}
-    - scipy
-    - pillow
+    - python >={{ python_min }}
+    - numpy >=1.14
+    - scipy >=1.0
+    - pillow >=4.0
+    - matplotlib-base >=3.0
     - ffmpeg
-    - matplotlib-base
-    - cyvlfeat
+    - cyvlfeat >=0.8.1
     - opencv
 
 test:
@@ -41,9 +45,16 @@ test:
     - menpo.shape
     - menpo.transform
     - menpo.visualize
+  requires:
+    - python {{ python_min }}.*
+    - pip
+  commands:
+    - pip check
 
 about:
   home: https://github.com/menpo/menpo
+  dev_url: https://github.com/menpo/menpo
+  doc_url: https://menpo.readthedocs.io/en/stable/
   license: BSD-3-Clause
   license_family: BSD
   license_file: LICENSE.txt
