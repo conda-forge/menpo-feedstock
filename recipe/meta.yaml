@@ -1,13 +1,13 @@
 {% set name = "menpo" %}
-{% set version = "0.11.1" %}
+{% set version = "0.12.0" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 6078270962d7c036872d61a470b0b539e972990748a33a2a31940a06386abefb
+  url: https://files.pythonhosted.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: 82893c5f5ddcadc1f528f629672e1dbff8411635661c5e5400f05ca20c0f7a90
 
 build:
   number: 0
