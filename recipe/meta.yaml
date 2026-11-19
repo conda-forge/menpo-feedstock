@@ -1,5 +1,5 @@
 {% set name = "menpo" %}
-{% set version = "0.12.0" %}
+{% set version = "0.12.1" %}
 # upstream supports 3.10, but conda-forge has no 3.10 build of cyvlfeat >=0.8.1 (python_min is 3.11), and
 # the noarch test environment is solved at python_min
 {% set python_min = "3.11" %}
@@ -10,7 +10,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 82893c5f5ddcadc1f528f629672e1dbff8411635661c5e5400f05ca20c0f7a90
+  sha256: 78a687c2c9020daaa717eb0df1baa34042fcaff17669a62eb5c2709e6f29173b
 
 build:
   number: 0
